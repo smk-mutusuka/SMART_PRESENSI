@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Presensi SMK MUTUSUKA">
+  <title>SMART MUTUSUKA - System Monitoring & Attendance Response Technology</title>
+
+  <meta property="og:title" content="SMART MUTUSUKA - System Monitoring & Attendance Response Technology">
+  <meta property="og:description" content="Aplikasi Presensi Digital SMK Muhammadiyah 1 Surakarta">
+  <meta property="og:url" content="https://smkmutusuka.github.io/Smart_App/">
+  <meta property="og:image" content="https://lh3.googleusercontent.com/d/1e-_r4-cs_YZwTDIZ9SUhpQsRrxlw2dAs">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SMART MUTUSUKA">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SMART MUTUSUKA - System Monitoring & Attendance Response Technology">
+  <meta name="twitter:description" content="Aplikasi Presensi Digital SMK Muhammadiyah 1 Surakarta">
+  <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1e-_r4-cs_YZwTDIZ9SUhpQsRrxlw2dAs">
+
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1e-_r4-cs_YZwTDIZ9SUhpQsRrxlw2dAs">
+  <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1e-_r4-cs_YZwTDIZ9SUhpQsRrxlw2dAs">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="all">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="all">
+ 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" media="all">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" media="all">
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+
+<script>
+var BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzTivnrJfVNTyBVo_0oPdsL55HZqlvxh9sfg22TCiXogianFDtmRU41cWIqNPmnZ2_O/exec';
+
+(function() {
+  if (window.google && window.google.script && window.google.script.run && window.google.script.run._real) return;
+
+  var backendFunctions = [
+    'doLogin','doGtkLogin','doStudentLogin',
+    'getDashboardAdmin','getDashboardGTK',
+    'getKelas','getSiswa','saveKelas','saveSiswa','deleteKelas','deleteSiswa',
+    'getSiswaByKelas','cekAbsensi','submitAbsensi','submitAbsenWithGPS',
+    'getLaporanRekap','getStudentData',
+    'getWhatsappSiswa','updateWhatsappSiswa','getAllWhatsappSiswa',
+    'getWhatsappGTK','updateWhatsappGTK',
+    'gantiPasswordSiswa','gantiPasswordAdmin','gantiUsernameAdmin','gantiPasswordGTK',
+    'getLokasiSekolah','saveLokasiSekolah','geocodeAddress','reverseGeocode',
+    'getPendingApprovals','getApprovalStats','approveAbsensi','rejectAbsensi',
+    'submitAbsensiGTK',
+    'getDirectTugasSiswa','submitDirectTugasSiswa',
+    'getSemuaTugasAdmin','simpanNilaiDirectTugas','hapusDirectTugas',
+    'getKelasForFilter','getSiswaTidakHadir',
+    'aiGuruGenerate','generateLaporanGTKPDF',
+    'getAllDUDI','saveDUDI','deleteDUDI','generateKodeAksesDUDI',
+    'getSiswaXII','getAllPKL','savePKL','deletePKL','getPKLByNIS','getPKLByDUDI',
+    'cekAbsenPKLHariIni','submitAbsenPKL','getRiwayatAbsenPKL',
+    'cekJurnalPKLHariIni','submitJurnalPKL','getRiwayatJurnalPKL',
+    'loginPembimbing',
+    'getDashboardPembimbingSecure',
+    'approveAbsenPembimbingSecure','rejectAbsenPembimbingSecure',
+    'approveJurnalDUDISecure','rejectJurnalDUDISecure',
+    'resetPinPembimbing',
+    'getJurnalPendingGuru','getRiwayatJurnalGuru',
+    'approveJurnalSekolah','rejectJurnalSekolah',
+    'getStatsJurnalGuru','getSiswaBinaanGuru','getGTKList','getMonitoringBinaanGuru',
+    'submitMonitoringPKL','getRiwayatMonitoringGuru','cekMonitoringHariIni',
+    'getSiswaBelumAbsen',
+    'getSiswaTidakHadirLengkap',
+    'autoMarkAlpaHariIni',
+    'submitAbsenPulangSiswa',
+    'getApprovalDashboardData',
+    'approveAbsensiBatch',
+    'ubahKeHadirBatch',
+    'rejectAbsensiBatch'
+  ];
+ 
+  var FETCH_TIMEOUT_MS = 25000;
+
+  function callBackend(fnName, args, onSuccess, onFailure) {
+    console.log('[API] Call:', fnName, args);
+
+    var controller = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timedOut = false;
+    var timer = setTimeout(function() {
+      timedOut = true;
+      if (controller) { try { controller.abort(); } catch(e){} }
+      var err = new Error('Timeout ' + (FETCH_TIMEOUT_MS/1000) + 's. Backend tidak merespons. Cek koneksi / deployment Apps Script.');
+      console.error('[API Timeout]', fnName);
+      if (onFailure) onFailure(err);
+    }, FETCH_TIMEOUT_MS);
+
+    var fetchOpts = {
+      method: 'POST',
+      body: JSON.stringify({ fn: fnName, args: args })
+    };
+    if (controller) fetchOpts.signal = controller.signal;
+
+    fetch(BACKEND_URL, fetchOpts)
+      .then(function(res) {
+        if (timedOut) return null;
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      })
+      .then(function(text) {
+        if (timedOut || text === null) return;
+        clearTimeout(timer);
+
+        if (text.trim().charAt(0) === '<') {
+          throw new Error('Backend balikin HTML, bukan JSON. Cek deployment Apps Script (harus "Anyone").');
+        }
+        var parsed;
+        try { parsed = JSON.parse(text); }
+        catch (e) { throw new Error('Response bukan JSON valid: ' + text.slice(0, 120)); }
+
+        setTimeout(function() {
+          try {
+            if (parsed.success) {
+              if (onSuccess) onSuccess(parsed.data);
+            } else {
+              var err = new Error(parsed.error || 'Backend error tanpa pesan');
+              if (onFailure) onFailure(err);
+              else console.error('[API Error]', parsed.error);
+            }
+          } catch (cbErr) {
+            console.error('[API Callback Error]', cbErr);
+            if (onFailure) onFailure(cbErr);
+          }
+        }, 0);
+      })
+      .catch(function(err) {
+        clearTimeout(timer);
+        if (timedOut) return;
+        console.error('[API Fetch Error]', err);
+        if (onFailure) onFailure(err);
+      });
+  }
+
+  function makeRunner() {
+    function createChain() {
+      var state = { onSuccess: null, onFailure: null };
+      var chain = {};
+
+      chain.withSuccessHandler = function(cb) { state.onSuccess = cb; return chain; };
+      chain.withFailureHandler = function(cb) { state.onFailure = cb; return chain; };
+
+      backendFunctions.forEach(function(fnName) {
+        chain[fnName] = function() {
+          var args = Array.prototype.slice.call(arguments);
+          callBackend(fnName, args, state.onSuccess, state.onFailure);
+          return chain;
+        };
+      });
+      return chain;
+    }
+
+    return {
+      withSuccessHandler: function(cb) { return createChain().withSuccessHandler(cb); },
+      withFailureHandler: function(cb) { return createChain().withFailureHandler(cb); }
+    };
+  }
+
+  window.google = window.google || {};
+  window.google.script = window.google.script || {};
+  window.google.script.run = makeRunner();
+  window.google.script.run._real = true;
+
+  console.log('[Adapter] ✅ google.script.run siap (timeout ' + (FETCH_TIMEOUT_MS/1000) + 's)');
+})();
+</script>
+</head>
+<body>
+
+<div id="global-loader" class="hidden">
+  <div class="spinner"></div>
+  <p>Memproses data...</p>
+</div>
+
+<!-- LOGIN PAGE -->
+<div id="login-page">
+    <div class="login-box">
+    <img src="https://lh3.googleusercontent.com/d/1e-_r4-cs_YZwTDIZ9SUhpQsRrxlw2dAs" alt="Logo SMK Muhammadiyah 1 Surakarta" style="width: 130px; height: auto; margin-bottom: 14px; display: inline-block;">
+    <h2>SMART MUTUSUKA</h2>
+    <p><span style="font-style: italic;">System Monitoring & Attendance Response Technology</span></p>
+
+    <div class="login-tabs">
+      <button type="button" class="login-tab-btn active" id="tab-btn-admin" onclick="switchLoginTab('admin')">
+        <i class="fas fa-user-shield"></i> Admin
+      </button>
+      <button type="button" class="login-tab-btn" id="tab-btn-gtk" onclick="switchLoginTab('gtk')">
+        <i class="fas fa-chalkboard-teacher"></i> GTK
+      </button>
+      <button type="button" class="login-tab-btn" id="tab-btn-siswa" onclick="switchLoginTab('siswa')">
+        <i class="fas fa-user-graduate"></i> Siswa
+      </button>
+    </div>
+
+    <form id="loginFormAdmin" onsubmit="handleLoginAdmin(event)" autocomplete="off">
+      <div class="form-group" style="text-align: left;">
+        <label for="username">Username Admin</label>
+        <input type="text" id="username" class="form-control" required placeholder="Contoh: admin">
+      </div>
+      <div class="form-group" style="text-align: left;">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" required placeholder="Contoh: admin123">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;font-size:14px;">
+        <i class="fas fa-sign-in-alt"></i> Masuk Admin
+      </button>
+    </form>
+
+    <form id="loginFormGtk" onsubmit="handleLoginGTK(event)" autocomplete="off" class="hidden">
+      <div class="form-group" style="text-align: left;">
+        <label for="nbm_login"><i class="fas fa-id-badge"></i> NBM (Nomor Baku Muhammadiyah)</label>
+        <input type="text" inputmode="numeric" id="nbm_login" class="form-control" required placeholder="Contoh NBM: 112233">
+      </div>
+      <div class="form-group" style="text-align: left;">
+        <label for="password_gtk"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="password_gtk" class="form-control" required placeholder="Default: NBM Anda">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;font-size:14px;">
+        <i class="fas fa-sign-in-alt"></i> Masuk GTK
+      </button>
+    </form>
+
+    <form id="loginFormSiswa" onsubmit="handleLoginSiswa(event)" autocomplete="off" class="hidden">
+      <div class="form-group" style="text-align: left;">
+        <label for="nis_login"><i class="fas fa-id-card"></i> Nomor Induk Siswa (NIS)</label>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" id="nis_login" class="form-control" required placeholder="Contoh NIS: 1001">
+      </div>
+      <div class="form-group" style="text-align: left;">
+        <label for="password_siswa"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="password_siswa" class="form-control" required placeholder="Default: NIS Anda">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;font-size:14px;">
+        <i class="fas fa-user-check"></i> Masuk Siswa
+      </button>
+    </form>
+  </div>
+  <div class="login-footer">Develope by <strong>@JK_HARINTO</strong></div>
+</div>
+
+<!-- LOGIN DUDI (halaman terpisah) -->
+<div id="login-dudi-page" class="hidden">
+  <div class="login-box">
+    <img src="https://lh3.googleusercontent.com/d/1e-_r4-cs_YZwTDIZ9SUhpQsRrxlw2dAs" alt="Logo SMK" style="width: 100px; height: auto; margin-bottom: 14px; display: inline-block;">
+    <h2 style="font-size:20px;">Login Pembimbing DUDI</h2>
+    <p style="font-size:12px; color:#64748b;">Monitoring absensi & jurnal siswa PKL</p>
+
+    <form id="loginFormPembimbing" onsubmit="handleLoginPembimbing(event)" autocomplete="off">
+      <div class="form-group" style="text-align: left;">
+        <label for="pemb_kode"><i class="fas fa-key"></i> Kode Akses DUDI</label>
+        <input type="text" id="pemb_kode" class="form-control" required placeholder="Contoh: ABC123" style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700;" maxlength="10">
+      </div>
+      <div class="form-group" style="text-align: left;">
+        <label for="pemb_pin"><i class="fas fa-lock"></i> PIN</label>
+        <input type="password" inputmode="numeric" pattern="[0-9]*" id="pemb_pin" class="form-control" required placeholder="6 digit angka" maxlength="6">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px;font-size:14px;">
+        <i class="fas fa-sign-in-alt"></i> Masuk Dashboard
+      </button>
+    </form>
+
+    <div style="margin-top:16px;font-size:12px;color:#64748b;text-align:center;">
+      <a href="javascript:void(0)" onclick="showLoginUtama()" style="color: var(--primary); font-weight: 700; text-decoration: none;">
+        ← Kembali ke Login Sekolah
+      </a>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--text-muted);text-align:center;">
+      Lupa PIN? Hubungi admin sekolah.
+    </div>
+  </div>
+  <div class="login-footer">Develope by <strong>@JK_HARINTO</strong></div>
+</div>
+
+<!-- APP LAYOUT -->
+<div id="app-layout" class="hidden">
+  <div class="topbar">
+    <div class="topbar-brand"><i class="fas fa-leaf"></i> PRESENSI SMK MUTUSUKA</div>
+    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Buka menu navigasi">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="overlay"></div>
+
+  <nav class="sidebar" id="sidebar" aria-label="Navigasi utama">
+    <div class="sidebar-header">
+      <span class="brand" id="sidebar-role-title"><i class="fas fa-leaf"></i> Dashboard</span>
+      <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Tutup menu navigasi">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Menu ADMIN -->
+    <ul class="sidebar-menu" id="menu-admin">
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-dashboard-admin', this); return false;" class="active" data-page="dashboard-admin"><i class="fas fa-chart-line"></i> Beranda Admin</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-approval-admin', this); return false;" data-page="approval-admin"><i class="fas fa-check-double"></i> Approval Absensi <span id="approval-badge" class="hidden" style="background:#ef4444;color:#fff;padding:1px 8px;border-radius:12px;font-size:10px;font-weight:700;margin-left:auto;">0</span></a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-lokasi-kelas', this); return false;" data-page="lokasi-kelas"><i class="fas fa-map-marker-alt"></i> Lokasi Sekolah</a></li>
+      <li class="menu-item-admin-pkl"><a href="#" onclick="showPage('page-dudi', this); return false;" data-page="dudi"><i class="fas fa-building"></i> Data DUDI (PKL)</a></li>
+      <li class="menu-item-admin-pkl"><a href="#" onclick="showPage('page-pkl-assign', this); return false;" data-page="pkl-assign"><i class="fas fa-user-tie"></i> Assign PKL Siswa</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-kelas', this); return false;" data-page="kelas"><i class="fas fa-chalkboard"></i> Data Kelas</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-siswa', this); return false;" data-page="siswa"><i class="fas fa-users"></i> Data Siswa</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-input-absen', this); return false;" data-page="input-absen"><i class="fas fa-clipboard-check"></i> Input Absensi</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-tugas-admin', this); return false;" data-page="tugas-admin"><i class="fas fa-folder-open"></i> Data Tugas Siswa</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-laporan', this); return false;" data-page="laporan"><i class="fas fa-file-alt"></i> Laporan Rekap</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-whatsapp-admin', this); return false;" data-page="whatsapp-admin"><i class="fab fa-whatsapp"></i> Monitoring WhatsApp</a></li>
+      <li class="menu-item-admin-full"><a href="#" onclick="showPage('page-pengaturan-admin', this); return false;" data-page="pengaturan-admin"><i class="fas fa-cog"></i> Pengaturan Akun</a></li>
+      <li style="margin-top: auto;"><a href="#" onclick="logout(); return false;" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+    </ul>
+
+    <!-- Menu GTK -->
+    <ul class="sidebar-menu hidden" id="menu-gtk">
+      <li><a href="#" onclick="showPage('page-dashboard-gtk', this); return false;" class="active" data-page="dashboard-gtk"><i class="fas fa-id-card-alt"></i> Presensi GTK</a></li>
+      <li id="menu-item-guru-tugas" class="hidden">
+        <a href="#" onclick="showPage('page-tugas-admin', this); return false;" data-page="tugas-admin">
+          <i class="fas fa-tasks"></i> Ambil / Nilai Tugas Siswa
+        </a>
+      </li>
+      <li id="menu-item-ai-guru" class="hidden">
+        <a href="#" onclick="showPage('page-ai-guru', this); return false;" data-page="ai-guru">
+          <i class="fas fa-magic"></i> AI Assistant Guru
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showPage('page-approval-jurnal-pkl', this); return false;" data-page="approval-jurnal-pkl">
+          <i class="fas fa-clipboard-check"></i> Approval Jurnal PKL
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showPage('page-monitoring-pkl-guru', this); return false;" data-page="monitoring-pkl-guru">
+          <i class="fas fa-user-check"></i> Monitoring PKL Binaan
+        </a>
+      </li>
+      <li><a href="#" onclick="showPage('page-whatsapp-gtk', this); return false;" data-page="whatsapp-gtk"><i class="fab fa-whatsapp"></i> Data WhatsApp</a></li>
+      <li><a href="#" onclick="showPage('page-pengaturan-gtk', this); return false;" data-page="pengaturan-gtk"><i class="fas fa-cog"></i> Pengaturan Akun</a></li>
+      <li style="margin-top: auto;"><a href="#" onclick="logout(); return false;" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+    </ul>
+
+    <!-- Menu SISWA -->
+    <ul class="sidebar-menu hidden" id="menu-siswa">
+      <li><a href="#" onclick="showPage('page-dashboard-siswa', this); return false;" class="active" data-page="dashboard-siswa"><i class="fas fa-home"></i> Beranda Siswa</a></li>
+      <li><a href="#" onclick="showPage('page-absen-siswa', this); return false;" data-page="absen-siswa"><i class="fas fa-user-check"></i> Absen Hari Ini</a></li>
+      <li id="menu-pkl-presensi" class="hidden"><a href="#" onclick="showPage('page-pkl-presensi', this); return false;" data-page="pkl-presensi"><i class="fas fa-briefcase"></i> Presensi PKL</a></li>
+      <li id="menu-pkl-jurnal" class="hidden"><a href="#" onclick="showPage('page-pkl-jurnal', this); return false;" data-page="pkl-jurnal"><i class="fas fa-book"></i> Jurnal Harian PKL</a></li>
+      <li><a href="#" onclick="showPage('page-tugas-siswa', this); return false;" data-page="tugas-siswa"><i class="fas fa-cloud-upload-alt"></i> Upload Tugas Saya</a></li>
+      <li><a href="#" onclick="showPage('page-whatsapp-siswa', this); return false;" data-page="whatsapp-siswa"><i class="fab fa-whatsapp"></i> Data WhatsApp</a></li>
+      <li><a href="#" onclick="showPage('page-pengaturan-siswa', this); return false;" data-page="pengaturan-siswa"><i class="fas fa-cog"></i> Pengaturan Akun</a></li>
+      <li style="margin-top: auto;"><a href="#" onclick="logout(); return false;" style="color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- PEMBIMBING INDUSTRI -->
+    <section id="page-pembimbing" class="page hidden" style="padding:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+        <div>
+          <h1 class="page-title" style="margin:0;"><i class="fas fa-industry" style="color:var(--primary);"></i> Dashboard Pembimbing</h1>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Monitoring absensi & jurnal siswa PKL</div>
+        </div>
+      </div>
+      <div id="pembimbing-content">
+        <div style="text-align:center;padding:32px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2em;color:var(--primary);"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPROVAL JURNAL PKL (GURU) -->
+    <section id="page-approval-jurnal-pkl" class="page hidden">
+      <h1 class="page-title"><i class="fas fa-clipboard-check" style="color:var(--primary);"></i> Approval Jurnal PKL Siswa Binaan</h1>
+      <div id="guru-jurnal-content"></div>
+    </section>
+
+    <!-- MONITORING PKL GURU -->
+    <section id="page-monitoring-pkl-guru" class="page hidden">
+      <h1 class="page-title"><i class="fas fa-user-check" style="color:var(--primary);"></i> Monitoring PKL Binaan</h1>
+      <div id="monitoring-pkl-content">
+        <div style="text-align:center;padding:32px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2em;color:var(--primary);"></i>
+          <p style="margin-top:12px;color:var(--text-muted);">Memuat data siswa binaan...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD ADMIN -->
+    <section id="page-dashboard-admin" class="page">
+      <h1 class="page-title">Selamat Datang di SMART MUTUSUKA (Sistem Monitoring Absensi Responsif dan Terintegrasi)</h1>
+      <div class="dash-welcome">
+        <h2>Dashboard Absensi Sekolah</h2>
+        <p>Pantau ringkasan kehadiran siswa dan GTK secara real-time.</p>
+      </div>
+
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);">
+        <div class="dash-date-filter">
+          <div class="form-group">
+            <label for="dash_date"><i class="far fa-calendar-alt"></i> Pilih Tanggal</label>
+            <input type="date" id="dash_date" class="form-control" style="background:#fff;">
+          </div>
+          <div class="form-group" style="flex:0 0 auto;">
+            <label>&nbsp;</label>
+            <div style="display:flex;gap:6px;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="loadDashboardWithDate()"><i class="fas fa-search"></i> Tampilkan</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="resetDashboardDate()"><i class="fas fa-undo"></i> Reset</button>
+            </div>
+          </div>
+          <div class="form-group" style="flex:0 0 auto;">
+            <label>Quick Filter</label>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;">
+              <button type="button" class="btn-quick" onclick="setQuickDate(0)">Hari Ini</button>
+              <button type="button" class="btn-quick" onclick="setQuickDate(-1)">Kemarin</button>
+              <button type="button" class="btn-quick" onclick="setQuickDate(-7)">7 Hari</button>
+              <button type="button" class="btn-quick" onclick="setQuickDate(-30)">30 Hari</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="stat-section-title"><i class="fas fa-user-graduate"></i> Kehadiran Siswa <span class="stat-section-subtitle" id="siswa-count-info">-</span></h3>
+      <div class="stat-grid" id="dash-stat-grid-siswa">
+        <div class="stat-card bg-hadir">
+          <div class="stat-label">Total Hadir</div>
+          <div class="stat-value" id="dash-hadir">0</div>
+          <div class="stat-subinfo">
+            <span><i class="fas fa-clock"></i> <span id="dash-siswa-tepat">0</span> tepat</span>
+            <span><i class="fas fa-hourglass-half"></i> <span id="dash-siswa-terlambat">0</span> terlambat</span>
+          </div>
+          <i class="fas fa-check-circle stat-icon"></i>
+        </div>
+        <div class="stat-card bg-sakit"><div class="stat-label">Total Sakit</div><div class="stat-value" id="dash-sakit">0</div><i class="fas fa-thermometer-half stat-icon"></i></div>
+        <div class="stat-card bg-izin"><div class="stat-label">Total Izin</div><div class="stat-value" id="dash-izin">0</div><i class="fas fa-envelope-open stat-icon"></i></div>
+        <div class="stat-card bg-alpa"><div class="stat-label">Total Alpa</div><div class="stat-value" id="dash-alpa">0</div><i class="fas fa-user-times stat-icon"></i></div>
+      </div>
+
+      <h3 class="stat-section-title"><i class="fas fa-chalkboard-teacher"></i> Kehadiran GTK <span class="stat-section-subtitle" id="gtk-count-info">-</span></h3>
+      <div class="stat-grid" id="dash-stat-grid-gtk">
+        <div class="stat-card bg-hadir">
+          <div class="stat-label">GTK Hadir</div>
+          <div class="stat-value" id="dash-gtk-hadir">0</div>
+          <div class="stat-subinfo">
+            <span><i class="fas fa-clock"></i> <span id="dash-gtk-tepat">0</span> tepat</span>
+            <span><i class="fas fa-hourglass-half"></i> <span id="dash-gtk-terlambat">0</span> terlambat</span>
+          </div>
+          <i class="fas fa-user-check stat-icon"></i>
+        </div>
+        <div class="stat-card bg-sakit"><div class="stat-label">GTK Sakit</div><div class="stat-value" id="dash-gtk-sakit">0</div><i class="fas fa-thermometer-half stat-icon"></i></div>
+        <div class="stat-card bg-izin"><div class="stat-label">GTK Izin</div><div class="stat-value" id="dash-gtk-izin">0</div><i class="fas fa-envelope-open stat-icon"></i></div>
+        <div class="stat-card" style="background:linear-gradient(135deg,#6366f1,#4f46e5);">
+          <div class="stat-label">Total GTK</div>
+          <div class="stat-value" id="dash-gtk-total">0</div>
+          <div class="stat-subinfo"><span><i class="fas fa-door-open"></i> <span id="dash-gtk-pulang">0</span> pulang</span></div>
+          <i class="fas fa-users stat-icon"></i>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card chart-card-full">
+          <div class="chart-card-header">
+            <div><div class="chart-card-title"><i class="fas fa-chart-line"></i> Tren Kehadiran Siswa</div><div class="chart-card-subtitle" id="trenSubtitle">7 hari terakhir</div></div>
+            <span class="chart-badge"><i class="fas fa-sync-alt"></i> Real-time</span>
+          </div>
+          <div class="chart-wrapper"><canvas id="chartTrenMingguan"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header"><div><div class="chart-card-title"><i class="fas fa-chart-pie"></i> Distribusi Siswa</div><div class="chart-card-subtitle" id="distribusiSubtitle">Keseluruhan</div></div></div>
+          <div class="chart-wrapper chart-wrapper-doughnut"><canvas id="chartDistribusi"></canvas></div>
+          <div class="doughnut-legend" id="doughnutLegend"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div><div class="chart-card-title"><i class="fas fa-chart-bar"></i> Rekap Per Kelas</div><div class="chart-card-subtitle" id="kelasCountInfo">Perbandingan antar kelas</div></div>
+            <span class="chart-badge" id="kelasBadge"><i class="fas fa-layer-group"></i> <span id="kelasCountBadge">0</span> Kelas</span>
+          </div>
+          <div class="chart-wrapper"><canvas id="chartPerKelas"></canvas></div>
+        </div>
+      </div>
+
+      <h3 class="stat-section-title" style="margin-top:18px;">
+        <i class="fab fa-whatsapp" style="color:#25D366;"></i> Notifikasi WhatsApp — Siswa Tidak Hadir
+        <span class="stat-section-subtitle" id="wa-notif-count-info">-</span>
+      </h3>
+
+      <div class="card" style="background:#fffbeb;border:1px solid #fde68a;padding:14px 18px;margin-bottom:14px;">
+        <div style="font-size:12.5px;color:#78350f;line-height:1.5;">
+          <i class="fas fa-info-circle" style="color:#d97706;"></i> Klik tombol <strong>WA Wali</strong> atau <strong>WA Siswa</strong> untuk mengirim pesan notifikasi.
+        </div>
+      </div>
+
+      <div class="card" id="wa-notif-container">
+        <div style="text-align:center;padding:24px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:1.6em;color:var(--primary);"></i>
+          <p style="margin-top:8px;color:var(--text-muted);font-size:13px;">Memuat data siswa tidak hadir...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD GTK -->
+    <section id="page-dashboard-gtk" class="page hidden">
+      <h1 class="page-title">Dashboard GTK</h1>
+      <div class="dash-welcome">
+        <h2>Selamat Datang, <span id="gtk-welcome-name">Bapak/Ibu</span> 👋</h2>
+        <p id="gtk-welcome-info">NBM: - | Tugas: -</p>
+      </div>
+
+      <div id="gtk-dashboard-stats" class="hidden">
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-card-title"><i class="fas fa-pie-chart"></i> Kehadiran Anda</div>
+                <div class="chart-card-subtitle" id="gtk-persen-info">0% kehadiran</div>
+              </div>
+            </div>
+            <div class="chart-wrapper chart-wrapper-doughnut"><canvas id="chartGTKPersonal"></canvas></div>
+            <div class="doughnut-legend" id="doughnutLegendGTK"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header"><div><div class="chart-card-title"><i class="fas fa-calendar-check"></i> Status Hari Ini</div></div></div>
+            <div id="gtk-today-status-box" style="padding:15px;text-align:center;"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="margin-bottom:14px;">
+            <div class="chart-card-title" style="margin:0 0 10px 0;"><i class="fas fa-history"></i> Riwayat Presensi Saya</div>
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;">
+              <select id="gtk_filter_bulan" class="form-control" style="flex:0 0 140px;min-height:34px;padding:4px 8px;font-size:12.5px;">
+                <option value="">-- Semua Bulan --</option>
+                <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option>
+                <option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option>
+                <option value="7">Juli</option><option value="8">Agustus</option><option value="9">September</option>
+                <option value="10">Oktober</option><option value="11">November</option><option value="12">Desember</option>
+              </select>
+              <select id="gtk_filter_tahun" class="form-control" style="flex:0 0 110px;min-height:34px;padding:4px 8px;font-size:12.5px;">
+                <option value="">Tahun</option>
+              </select>
+              <button type="button" class="btn btn-primary btn-sm" onclick="loadGTKDashboard()" style="flex:0 0 auto;min-height:34px;white-space:nowrap;"><i class="fas fa-search"></i> Tampilkan</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="resetFilterGTK()" style="flex:0 0 auto;min-height:34px;white-space:nowrap;"><i class="fas fa-undo"></i> Reset</button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="exportLaporanGTKPDF()" style="flex:0 0 auto;min-height:34px;white-space:nowrap;"><i class="fas fa-file-pdf"></i> Export PDF</button>
+            </div>
+          </div>
+
+          <div class="table-pagination-header">
+            <div class="table-entries-select">
+              <label for="gtkHistoryPageSize">Show</label>
+              <select id="gtkHistoryPageSize" onchange="changePageSize('gtkHistory')">
+                <option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option>
+              </select>
+              <span>entries</span>
+            </div>
+          </div>
+
+          <div class="laporan-scroll">
+            <table class="table-laporan">
+              <thead>
+                <tr>
+                  <th>Tanggal</th><th>Status</th><th>Waktu Masuk</th><th>Waktu Pulang</th>
+                  <th>Keterangan</th><th>Jarak</th><th>Selfie Masuk</th><th>Selfie Pulang</th>
+                </tr>
+              </thead>
+              <tbody id="gtkHistoryTbody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-pagination-footer" id="gtkHistoryPaginationFooter">
+            <span id="gtkHistoryEntriesInfo">Showing 0 to 0 of 0 entries</span>
+            <div class="pagination-controls" id="gtkHistoryPaginationBtnGroup"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="chart-card-title" style="margin-bottom: 14px;"><i class="fas fa-fingerprint"></i> Form Presensi Masuk GTK</div>
+        <form id="formPresensiGTK" onsubmit="handlePresensiGTK(event)">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label><i class="fas fa-check-square"></i> Status Kehadiran</label>
+            <div class="absen-options-personal" style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <label class="radio-btn"><input type="radio" name="gtk_status" value="Hadir" checked onchange="handleGTKStatusChange('Hadir')"> <i class="fas fa-check-circle"></i> Hadir</label>
+              <label class="radio-btn"><input type="radio" name="gtk_status" value="Pulang" onchange="handleGTKStatusChange('Pulang')"> <i class="fas fa-walking"></i> Pulang</label>
+              <label class="radio-btn"><input type="radio" name="gtk_status" value="Sakit" onchange="handleGTKStatusChange('Sakit')"> <i class="fas fa-thermometer-half"></i> Sakit</label>
+              <label class="radio-btn"><input type="radio" name="gtk_status" value="Izin" onchange="handleGTKStatusChange('Izin')"> <i class="fas fa-envelope"></i> Izin</label>
+            </div>
+          </div>
+
+          <div id="gtk-hadir-section" class="card" style="background:#f0fdf4; border:1.5px solid var(--primary-border); padding:14px; margin-top:0; margin-bottom:12px;">
+            <div class="form-group" style="margin-bottom:10px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <span style="font-weight:700; font-size:12px; color:var(--primary-dark);"><i class="fas fa-satellite"></i> Titik Lokasi GPS</span>
+                <button type="button" class="btn btn-outline btn-sm" onclick="getGTKLocation()" style="min-height:30px; padding:2px 8px; font-size:11px;"><i class="fas fa-sync-alt"></i> Refresh GPS</button>
+              </div>
+              <div id="gtk-gps-status" style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">Mendeteksi GPS...</div>
+              <input type="hidden" id="gtk_latitude" value="">
+              <input type="hidden" id="gtk_longitude" value="">
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="openGTKSelfie()"><i class="fas fa-camera"></i> Foto Selfie</button>
+              <div id="gtk_selfie_status" style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">Kamera siap...</div>
+            </div>
+
+            <input type="file" id="gtk_input_selfie" accept="image/*" capture="user" class="hidden" onchange="autoProcessSelfieGTK(this)">
+            <div style="margin-top:8px;">
+              <img id="gtk-preview-selfie" class="selfie-preview" src="" alt="Preview Selfie" style="display:none; width:100px; height:100px; margin:0; border-radius:10px; object-fit:cover;">
+            </div>
+            <input type="hidden" id="gtk_selfie_base64" value="">
+          </div>
+
+          <div id="gtk-surat-section" class="card hidden" style="background:#fffbeb; border:1.5px dashed #f59e0b; padding:14px; margin-top:0; margin-bottom:12px;">
+            <label style="font-weight:700; font-size:12px; color:#92400e; margin-bottom:6px; display:block;"><i class="fas fa-camera"></i> Bukti Surat Dokter / Izin</label>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn btn-primary btn-sm" style="background:#f59e0b; border-color:#d97706;" onclick="document.getElementById('gtk_input_camera_back').click()"><i class="fas fa-camera"></i> Ambil Foto</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('gtk_input_file_surat').click()"><i class="fas fa-file-upload"></i> Pilih File (JPG/PDF/PNG)</button>
+            </div>
+            <input type="file" id="gtk_input_camera_back" accept="image/*" capture="environment" class="hidden" onchange="autoProcessSuratGTK(this)">
+            <input type="file" id="gtk_input_file_surat" accept=".jpg,.jpeg,.png,.pdf" class="hidden" onchange="autoProcessSuratGTK(this)">
+            <div id="gtk_surat_status" style="font-size:12px; color:var(--text-muted); margin-top:8px; font-weight:600;">Jika sakit dg Surat Dokter, jika izin dengan bukti kegiatan</div>
+            <div style="margin-top:6px;"><img id="gtk-preview-surat" src="" alt="Preview Surat" style="display:none; width:70px; height:70px; object-fit:cover; border-radius:8px; border:1.5px solid #f59e0b;"></div>
+            <input type="hidden" id="gtk_surat_base64" value="">
+          </div>
+
+          <div class="form-group" style="margin-top:12px;">
+            <label for="gtk_keterangan"><i class="fas fa-sticky-note"></i> Catatan / Keterangan (Opsional)</label>
+            <input type="text" id="gtk_keterangan" class="form-control" placeholder="Contoh: Mengajar tepat waktu / Flu / Keperluan dinas">
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btnSubmitGTK" style="width:100%; min-height:46px;">
+            <i class="fas fa-paper-plane"></i> Kirim Presensi GTK
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- AI ASSISTANT GURU -->
+    <section id="page-ai-guru" class="page hidden">
+      <h1 class="page-title"><i class="fas fa-magic" style="color:var(--primary);"></i> AI Assistant Guru</h1>
+      <div id="ai-guru-content">
+        <div style="text-align:center;padding:32px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2em;color:var(--primary);"></i>
+          <p style="margin-top:12px;color:var(--text-muted);">Memuat AI Assistant...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATSAPP GTK -->
+    <section id="page-whatsapp-gtk" class="page hidden">
+      <h1 class="page-title">Data WhatsApp GTK</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fab fa-whatsapp"></i> Kelola Nomor WhatsApp GTK</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Masukkan nomor WhatsApp aktif Anda.</div>
+      </div>
+      <div class="card">
+        <form id="formWhatsappGTK" onsubmit="handleUpdateWhatsappGTK(event)">
+          <div class="form-group">
+            <label for="wa_gtk_input"><i class="fas fa-phone"></i> Nomor WhatsApp Aktif</label>
+            <input type="tel" id="wa_gtk_input" class="form-control" placeholder="Contoh: 081234567890" pattern="[0-9]{10,15}" required>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;"><i class="fas fa-info-circle"></i> Tanpa tanda + atau spasi (minimal 10 digit)</div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;min-height:42px;"><i class="fas fa-save"></i> Simpan WhatsApp GTK</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- PENGATURAN GTK -->
+    <section id="page-pengaturan-gtk" class="page hidden">
+      <h1 class="page-title">Pengaturan Akun GTK</h1>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:700;"><i class="fas fa-chalkboard-teacher"></i></div>
+          <div>
+            <div style="font-size:18px;font-weight:800;" id="settings-gtk-name">-</div>
+            <div style="font-size:13px;color:var(--text-muted);" id="settings-gtk-info">NBM: - | Tugas: -</div>
+          </div>
+        </div>
+
+        <form id="formGantiPasswordGTK" onsubmit="handleGantiPasswordGTK(event)">
+          <div style="background:#f8fafc;border-radius:var(--radius-md);padding:16px;">
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:10px;"><i class="fas fa-key" style="color:var(--primary);"></i> Ganti Password GTK</div>
+            <div class="form-group"><label for="gtk_current_password">Password Saat Ini</label><input type="password" id="gtk_current_password" class="form-control" required></div>
+            <div class="form-group"><label for="gtk_new_password">Password Baru</label><input type="password" id="gtk_new_password" class="form-control" required minlength="6"></div>
+            <div class="form-group"><label for="gtk_confirm_password">Konfirmasi Password Baru</label><input type="password" id="gtk_confirm_password" class="form-control" required></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;min-height:42px;"><i class="fas fa-save"></i> Simpan Password Baru</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- DASHBOARD SISWA -->
+    <section id="page-dashboard-siswa" class="page hidden">
+      <h1 class="page-title">Dashboard Siswa</h1>
+      <div class="dash-welcome">
+        <h2>Halo, <span id="student-welcome-name">Siswa</span> 👋</h2>
+        <p id="student-welcome-info">NIS: - | Kelas: -</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card bg-hadir"><div class="stat-label">Hadir</div><div class="stat-value" id="student-stat-hadir">0</div><i class="fas fa-check-circle stat-icon"></i></div>
+        <div class="stat-card bg-sakit"><div class="stat-label">Sakit</div><div class="stat-value" id="student-stat-sakit">0</div><i class="fas fa-thermometer-half stat-icon"></i></div>
+        <div class="stat-card bg-izin"><div class="stat-label">Izin</div><div class="stat-value" id="student-stat-izin">0</div><i class="fas fa-envelope-open stat-icon"></i></div>
+        <div class="stat-card bg-alpa"><div class="stat-label">Alpa</div><div class="stat-value" id="student-stat-alpa">0</div><i class="fas fa-user-times stat-icon"></i></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="chart-card-header"><div><div class="chart-card-title"><i class="fas fa-pie-chart"></i> Kehadiran Anda</div></div></div>
+          <div class="chart-wrapper chart-wrapper-doughnut"><canvas id="chartStudentPersonal"></canvas></div>
+          <div class="doughnut-legend" id="doughnutLegendPersonal"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header"><div><div class="chart-card-title"><i class="fas fa-history"></i> Status Hari Ini</div></div></div>
+          <div id="student-today-status-box" style="padding:15px;text-align:center;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="chart-card-title" style="margin-bottom:14px;"><i class="fas fa-list-ul"></i> Riwayat Absensi Saya</div>
+        <div class="table-pagination-header">
+          <div class="table-entries-select">
+            <label for="studentHistoryPageSize">Show</label>
+            <select id="studentHistoryPageSize" onchange="changePageSize('studentHistory')">
+              <option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option>
+            </select>
+            <span>entries</span>
+          </div>
+        </div>
+        <div class="laporan-scroll">
+          <table class="table-laporan">
+            <thead>
+              <tr>
+                <th>Tanggal</th><th>Status</th><th>Status Approval</th><th>Keterangan</th>
+                <th>Surat / Lampiran</th><th>Selfie</th><th>Jarak</th>
+              </tr>
+            </thead>
+            <tbody id="studentHistoryTbody"></tbody>
+          </table>
+        </div>
+        <div class="table-pagination-footer" id="studentHistoryPaginationFooter">
+          <span id="studentHistoryEntriesInfo">Showing 0 to 0 of 0 entries</span>
+          <div class="pagination-controls" id="studentHistoryPaginationBtnGroup"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPROVAL ADMIN -->
+    <section id="page-approval-admin" class="page hidden">
+      <h1 class="page-title">Approval Absensi Mandiri</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fas fa-clipboard-check"></i> Verifikasi Absensi Siswa</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Tinjau selfie, jarak GPS, dan akurasi GPS untuk memutuskan.</div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;background:#f8fafc;border:1px solid var(--border);">
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div class="form-group" style="flex:1;min-width:180px;margin-bottom:0;">
+            <label for="approval_filter_kelas"><i class="fas fa-chalkboard"></i> Filter Kelas</label>
+            <select id="approval_filter_kelas" class="form-control"><option value="">-- Semua Kelas --</option></select>
+          </div>
+          <div class="form-group" style="display:flex;gap:6px;margin-bottom:0;align-items:flex-end;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="loadApprovalDashboard()"><i class="fas fa-search"></i> Tampilkan</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="resetFilterApproval()"><i class="fas fa-undo"></i> Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="approval-stat-grid" style="margin-bottom:18px;margin-top:18px;">
+        <div class="stat-card" style="background:linear-gradient(135deg, #f59e0b, #d97706);"><div class="stat-label">Menunggu Approval</div><div class="stat-value" id="approval-pending">0</div><i class="fas fa-clock stat-icon"></i></div>
+        <div class="stat-card bg-hadir"><div class="stat-label">Disetujui</div><div class="stat-value" id="approval-approved">0</div><i class="fas fa-check-circle stat-icon"></i></div>
+        <div class="stat-card bg-alpa"><div class="stat-label">Ditolak</div><div class="stat-value" id="approval-rejected">0</div><i class="fas fa-times-circle stat-icon"></i></div>
+      </div>
+
+      <div id="approval-list-container">
+        <div class="card" style="text-align:center;padding:32px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2em;color:var(--primary);"></i>
+          <p style="margin-top:12px;color:var(--text-muted);">Memuat data approval...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSIGN PKL -->
+    <section id="page-pkl-assign" class="page hidden">
+      <h1 class="page-title">Assign PKL Siswa</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fas fa-user-tie"></i> Pasangkan Siswa XII ke DUDI</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Siswa yang di-assign akan mendapat menu PKL saat login.</div>
+      </div>
+
+      <div class="card">
+        <form id="formAssignPKL" onsubmit="simpanAssignPKL(event)">
+          <input type="hidden" id="pkl_edit_mode" value="false">
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="form-group" style="flex:0 0 200px;">
+              <label for="pkl_filter_kelas"><i class="fas fa-filter"></i> Filter Kelas</label>
+              <select id="pkl_filter_kelas" class="form-control" onchange="filterSiswaByKelas()">
+                <option value="">-- Semua Kelas XII --</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1;min-width:250px;">
+              <label for="pkl_siswa"><i class="fas fa-user-graduate"></i> Siswa Kelas XII</label>
+              <select id="pkl_siswa" class="form-control" required>
+                <option value="">-- Pilih Siswa XII --</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="form-group" style="flex:1;min-width:220px;">
+              <label for="pkl_dudi"><i class="fas fa-building"></i> DUDI / Tempat PKL</label>
+              <select id="pkl_dudi" class="form-control" required>
+                <option value="">-- Pilih DUDI --</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1;min-width:220px;">
+              <label for="pkl_pembimbing"><i class="fas fa-chalkboard-teacher"></i> Pembimbing Sekolah (Guru)</label>
+              <select id="pkl_pembimbing" class="form-control" required>
+                <option value="">-- Pilih Guru Pembimbing --</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="form-group" style="flex:1;min-width:150px;">
+              <label for="pkl_mulai"><i class="fas fa-calendar-check"></i> Tanggal Mulai</label>
+              <input type="date" id="pkl_mulai" class="form-control" required>
+            </div>
+            <div class="form-group" style="flex:1;min-width:150px;">
+              <label for="pkl_selesai"><i class="fas fa-calendar-times"></i> Tanggal Selesai</label>
+              <input type="date" id="pkl_selesai" class="form-control" required>
+            </div>
+            <div class="form-group" style="flex:0 0 130px;">
+              <label for="pkl_status">Status</label>
+              <select id="pkl_status" class="form-control">
+                <option value="Aktif">Aktif</option>
+                <option value="Selesai">Selesai</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan PKL</button>
+            <button type="button" class="btn btn-outline" onclick="resetFormPKL()"><i class="fas fa-times"></i> Batal</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="chart-card-title" style="margin-bottom:14px;"><i class="fas fa-list"></i> Daftar Siswa PKL</div>
+        <div class="laporan-scroll">
+          <table class="table-laporan">
+            <thead>
+              <tr>
+                <th>NIS</th><th>Nama Siswa</th><th>Kelas</th><th>DUDI</th>
+                <th>Pembimbing Sekolah</th><th>Periode</th><th>Status</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyPKL"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATA DUDI -->
+    <section id="page-dudi" class="page hidden">
+      <h1 class="page-title">Data DUDI (Tempat PKL)</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fas fa-building"></i> Kelola Tempat PKL</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Isi koordinat GPS lokasi DUDI + radius, dan kode akses untuk pembimbing.</div>
+      </div>
+
+      <div class="card">
+        <form id="formDUDI" onsubmit="simpanDUDI(event)">
+          <input type="hidden" id="dudi_id">
+          <div class="form-group">
+            <label for="dudi_nama"><i class="fas fa-signature"></i> Nama DUDI</label>
+            <input type="text" id="dudi_nama" class="form-control" required placeholder="Contoh: Bengkel Jaya Motor">
+          </div>
+          <div class="form-group">
+            <label for="dudi_alamat"><i class="fas fa-map"></i> Alamat</label>
+            <input type="text" id="dudi_alamat" class="form-control" placeholder="Jl. Slamet Riyadi No. 123">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-location-dot"></i> Titik GPS DUDI</label>
+            <div class="map-search-box" style="margin-bottom:8px;">
+              <input type="text" id="dudi_search_input" class="form-control" placeholder="Cari alamat DUDI...">
+              <button type="button" class="btn btn-outline btn-sm" onclick="searchDUDILocation()" style="min-height:42px;">Cari</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="useCurrentLocationForDUDI()" style="min-height:42px;"><i class="fas fa-crosshairs"></i> Lokasi Saya</button>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <div class="form-group" style="flex:1;min-width:120px;">
+                <label for="dudi_lat">Latitude</label>
+                <input type="text" id="dudi_lat" class="form-control" required placeholder="-7.592900">
+              </div>
+              <div class="form-group" style="flex:1;min-width:120px;">
+                <label for="dudi_lng">Longitude</label>
+                <input type="text" id="dudi_lng" class="form-control" required placeholder="110.824800">
+              </div>
+              <div class="form-group" style="flex:0 0 130px;">
+                <label for="dudi_radius">Radius (m)</label>
+                <input type="number" id="dudi_radius" class="form-control" value="20" min="5" max="5000" required>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="form-group" style="flex:1;min-width:180px;">
+              <label for="dudi_pembimbing"><i class="fas fa-user-tie"></i> Nama Pembimbing</label>
+              <input type="text" id="dudi_pembimbing" class="form-control" placeholder="Budi Santoso">
+            </div>
+            <div class="form-group" style="flex:1;min-width:150px;">
+              <label for="dudi_wa"><i class="fab fa-whatsapp"></i> WA Pembimbing</label>
+              <input type="tel" id="dudi_wa" class="form-control" placeholder="62812345678">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dudi_kode"><i class="fas fa-key"></i> Kode Akses Pembimbing</label>
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="dudi_kode" class="form-control" required placeholder="DUDI001">
+              <button type="button" class="btn btn-outline" onclick="generateKode()" style="min-width:100px;">Acak</button>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan DUDI</button>
+            <button type="button" class="btn btn-outline" onclick="resetFormDUDI()"><i class="fas fa-times"></i> Batal</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="chart-card-title" style="margin-bottom:14px;"><i class="fas fa-list"></i> Daftar DUDI</div>
+        <div class="laporan-scroll">
+          <table class="table-laporan" id="tableDUDI">
+            <thead>
+              <tr>
+                <th>ID</th><th>Nama DUDI</th><th>Pembimbing</th><th>Koordinat</th>
+                <th>Radius</th><th>Kode Akses</th><th>Link Pembimbing</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyDUDI"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOKASI SEKOLAH -->
+    <section id="page-lokasi-kelas" class="page hidden">
+      <h1 class="page-title">Lokasi Sekolah & Radius Presensi</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fas fa-school"></i> Titik Lokasi Sekolah</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Satu titik untuk <strong>semua presensi siswa & GTK</strong>.</div>
+      </div>
+
+      <div class="info-box"><i class="fas fa-info-circle"></i> <strong>Cara pakai:</strong> Isi koordinat manual atau klik tombol "Gunakan Lokasi Saya", atur radius, lalu klik <strong>Simpan Lokasi</strong>.</div>
+
+      <div id="lokasi-info-card"></div>
+
+      <div class="card">
+        <form id="formLokasiSekolah" onsubmit="saveLokasiSekolah(event)">
+          <div class="form-group">
+            <label for="lokasi_nama_sekolah"><i class="fas fa-signature"></i> Nama Sekolah</label>
+            <input type="text" id="lokasi_nama_sekolah" class="form-control" value="SMK Muhammadiyah 1 Surakarta">
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-search"></i> Cari Alamat (opsional)</label>
+            <div class="map-search-box">
+              <input type="text" id="map_search_input" class="form-control" placeholder="Cari gedung/alamat...">
+              <button type="button" class="btn btn-primary btn-sm" onclick="searchLocation()" style="min-height:42px;min-width:70px;"><i class="fas fa-search"></i> Cari</button>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1;">
+            <div class="form-group" style="flex:1;min-width:120px;">
+              <label for="lokasi_lat"><i class="fas fa-arrow-up"></i> Latitude</label>
+              <input type="text" id="lokasi_lat" class="form-control" placeholder="-7.592981" required>
+            </div>
+            <div class="form-group" style="flex:1;min-width:120px;">
+              <label for="lokasi_lng"><i class="fas fa-arrow-right"></i> Longitude</label>
+              <input type="text" id="lokasi_lng" class="form-control" placeholder="110.824800" required>
+            </div>
+            <div class="form-group" style="flex:0 0 160px;">
+              <label for="lokasi_radius"><i class="fas fa-expand"></i> Radius (meter)</label>
+              <input type="number" id="lokasi_radius" class="form-control" value="100" min="5" max="5000" required>
+            </div>
+          </div>
+          <div class="map-actions">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan Lokasi</button>
+            <button type="button" class="btn btn-outline" onclick="getCurrentLocation()"><i class="fas fa-location-dot"></i> Gunakan Lokasi Saya</button>
+            <button type="button" class="btn btn-outline" onclick="loadLokasiSekolah()"><i class="fas fa-undo"></i> Muat Ulang</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PRESENSI PKL -->
+    <section id="page-pkl-presensi" class="page hidden">
+      <h1 class="page-title"><i class="fas fa-briefcase" style="color:var(--primary);"></i> Presensi PKL</h1>
+      <div id="pkl-presensi-content">
+        <div style="text-align:center;padding:32px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2em;color:var(--primary);"></i>
+          <p style="margin-top:12px;color:var(--text-muted);">Memuat data PKL...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JURNAL PKL -->
+    <section id="page-pkl-jurnal" class="page hidden">
+      <h1 class="page-title"><i class="fas fa-book" style="color:var(--primary);"></i> Jurnal Harian PKL</h1>
+      <div id="pkl-jurnal-content">
+        <div style="text-align:center;padding:32px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2em;color:var(--primary);"></i>
+          <p style="margin-top:12px;color:var(--text-muted);">Memuat jurnal...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABSEN SISWA -->
+    <section id="page-absen-siswa" class="page hidden">
+      <h1 class="page-title">Absensi Mandiri Siswa</h1>
+      <div id="student-absen-page-content"></div>
+    </section>
+
+    <!-- WHATSAPP SISWA -->
+    <section id="page-whatsapp-siswa" class="page hidden">
+      <h1 class="page-title">Data WhatsApp</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fab fa-whatsapp"></i> Kelola Nomor WhatsApp</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Nomor pribadi dan wali murid.</div>
+      </div>
+
+      <div class="card">
+        <form id="formWhatsappSiswa" onsubmit="handleUpdateWhatsappSiswa(event)">
+          <div class="form-group"><label for="wa_siswa"><i class="fas fa-user"></i> WhatsApp Pribadi</label><input type="tel" id="wa_siswa" class="form-control" placeholder="Contoh: 081234567890" pattern="[0-9]{10,15}"></div>
+          <div class="form-group"><label for="wa_wali"><i class="fas fa-user-friends"></i> WhatsApp Wali Murid</label><input type="tel" id="wa_wali" class="form-control" placeholder="Contoh: 081234567891" pattern="[0-9]{10,15}"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;min-height:42px;"><i class="fas fa-save"></i> Simpan Data WhatsApp</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="chart-card-title" style="margin-bottom:14px;"><i class="fas fa-list"></i> Data WhatsApp Tersimpan</div>
+        <div id="wa-siswa-display">
+          <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;background:#f8fafc;padding:14px 18px;border-radius:var(--radius-md);">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">WhatsApp Pribadi</div>
+              <div style="font-size:16px;font-weight:700;color:#0f172a;margin-top:4px;" id="display-wa-siswa">-</div>
+            </div>
+            <div style="flex:1;min-width:200px;background:#f8fafc;padding:14px 18px;border-radius:var(--radius-md);">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">WhatsApp Wali Murid</div>
+              <div style="font-size:16px;font-weight:700;color:#0f172a;margin-top:4px;" id="display-wa-wali">-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TUGAS SISWA -->
+    <section id="page-tugas-siswa" class="page hidden">
+      <h1 class="page-title">Upload Tugas Siswa</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fas fa-cloud-upload-alt"></i> Panel Kirim File Tugas</div>
+        <div style="font-size:12.5px;color:#065f46;margin-top:2px;">Unggah hasil pengerjaan tugas dari guru.</div>
+      </div>
+
+      <div class="card">
+        <form id="formUploadTugasSiswa" onsubmit="handleDirectUploadTugas(event)">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div class="form-group" style="flex:1;min-width:160px;margin-bottom:14px;">
+              <label for="student_mapel"><i class="fas fa-book"></i> Mata Pelajaran</label>
+              <input type="text" id="student_mapel" class="form-control" required placeholder="Contoh: Matematika">
+            </div>
+            <div class="form-group" style="flex:2;min-width:200px;margin-bottom:14px;">
+              <label for="student_judul_catatan"><i class="fas fa-sticky-note"></i> Judul / Catatan Tugas</label>
+              <input type="text" id="student_judul_catatan" class="form-control" required placeholder="Contoh: Latihan Bab 3">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label><i class="fas fa-paperclip"></i> Pilih File Tugas</label>
+            <div class="personal-file-upload" style="width:100%;">
+              <label class="file-label" for="file_direct_tugas" style="width:100%;justify-content:center;min-height:46px;font-size:13px;"><i class="fas fa-cloud-upload-alt" style="font-size:17px;"></i> Pilih File</label>
+              <input type="file" id="file_direct_tugas" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.zip" required onchange="updateDirectTugasFileName(this)">
+              <span class="file-name" id="file_direct_tugas_name" style="margin-top:8px;display:block;text-align:center;font-size:12px;">Belum ada file dipilih</span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;min-height:48px;font-size:15px;"><i class="fas fa-paper-plane"></i> Upload & Submit Tugas</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="chart-card-title" style="margin-bottom:16px;font-size:16px;"><i class="fas fa-history"></i> Riwayat Tugas Diupload</div>
+        <div class="table-pagination-header">
+          <div class="table-entries-select">
+            <label for="studentTugasPageSize">Show</label>
+            <select id="studentTugasPageSize" onchange="changePageSize('studentTugas')">
+              <option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option>
+            </select>
+            <span>entries</span>
+          </div>
+        </div>
+        <div class="tugas-siswa-wrapper">
+          <table class="table-tugas-siswa">
+            <thead>
+              <tr>
+                <th class="col-waktu">Waktu Upload</th>
+                <th class="col-mapel">Mata Pelajaran</th>
+                <th class="col-judul">Judul / Catatan</th>
+                <th class="col-file">File Tugas</th>
+                <th class="col-status">Status & Nilai</th>
+                <th class="col-catatan">Catatan Guru</th>
+              </tr>
+            </thead>
+            <tbody id="studentTugasHistoryTbody"></tbody>
+          </table>
+        </div>
+        <div class="table-pagination-footer" id="studentTugasPaginationFooter">
+          <span id="studentTugasEntriesInfo">Showing 0 to 0 of 0 entries</span>
+          <div class="pagination-controls" id="studentTugasPaginationBtnGroup"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TUGAS ADMIN -->
+    <section id="page-tugas-admin" class="page hidden">
+      <h1 class="page-title">Data Pengumpulan Tugas Siswa</h1>
+      <div class="card">
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div class="form-group" style="flex:1;min-width:140px;margin-bottom:0;">
+            <label for="admin_filter_tugas_kelas"><i class="fas fa-chalkboard"></i> Filter Kelas</label>
+            <select id="admin_filter_tugas_kelas" class="form-control"><option value="">-- Semua Kelas --</option></select>
+          </div>
+          <div class="form-group" style="flex:1.5;min-width:180px;margin-bottom:0;">
+            <label for="admin_filter_tugas_search"><i class="fas fa-search"></i> Cari Mapel / Siswa</label>
+            <input type="text" id="admin_filter_tugas_search" class="form-control" placeholder="Ketik nama siswa atau mapel...">
+          </div>
+          <div class="form-group" style="display:flex;gap:6px;margin-bottom:0;align-items:flex-end;">
+            <button type="button" class="btn btn-primary" onclick="loadTugasAdmin()"><i class="fas fa-search"></i> Cari</button>
+            <button type="button" class="btn btn-outline" onclick="resetFilterTugasAdmin()"><i class="fas fa-undo"></i> Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="laporan-container">
+        <div class="table-pagination-header">
+          <div class="table-entries-select">
+            <label for="tugasAdminPageSize">Show</label>
+            <select id="tugasAdminPageSize" onchange="changePageSize('tugasAdmin')">
+              <option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option>
+            </select>
+            <span>entries</span>
+          </div>
+        </div>
+        <div class="tugas-admin-wrapper">
+          <table class="table-tugas-admin">
+            <thead>
+              <tr>
+                <th style="width:40px;">No</th><th style="min-width:90px;">Waktu</th><th style="min-width:80px;">Kelas</th>
+                <th style="min-width:130px;">NIS & Nama</th><th style="min-width:100px;">Mapel</th>
+                <th style="min-width:120px;">Judul / Catatan</th><th style="min-width:90px;">File</th>
+                <th style="min-width:120px;">Nilai & Feedback</th><th style="min-width:80px;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyTugasAdmin"></tbody>
+          </table>
+        </div>
+        <div class="table-pagination-footer" id="tugasAdminPaginationFooter">
+          <span id="tugasAdminEntriesInfo">Showing 0 to 0 of 0 entries</span>
+          <div class="pagination-controls" id="tugasAdminPaginationBtnGroup"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATSAPP ADMIN -->
+    <section id="page-whatsapp-admin" class="page hidden">
+      <h1 class="page-title">Monitoring WhatsApp</h1>
+      <div class="card" style="background:var(--primary-light);border:1px solid var(--primary-border);margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;color:var(--primary-dark);"><i class="fab fa-whatsapp"></i> Kontak Siswa & Wali Murid</div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div class="form-group" style="flex:1;min-width:140px;margin-bottom:0;">
+            <label for="admin_wa_filter_kelas"><i class="fas fa-chalkboard"></i> Filter Kelas</label>
+            <select id="admin_wa_filter_kelas" class="form-control"><option value="">-- Semua Kelas --</option></select>
+          </div>
+          <div class="form-group" style="flex:1;min-width:160px;margin-bottom:0;">
+            <label for="admin_wa_filter_search"><i class="fas fa-search"></i> Cari Nama / NIS</label>
+            <input type="text" id="admin_wa_filter_search" class="form-control" placeholder="Ketik nama atau NIS...">
+          </div>
+          <div class="form-group" style="display:flex;gap:6px;margin-bottom:0;align-items:flex-end;">
+            <button type="button" class="btn btn-primary" onclick="loadWhatsappAdmin()"><i class="fas fa-search"></i> Tampilkan</button>
+            <button type="button" class="btn btn-outline" onclick="resetFilterWhatsappAdmin()"><i class="fas fa-undo"></i> Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="laporan-container">
+        <div class="table-pagination-header">
+          <div class="table-entries-select">
+            <label for="waAdminPageSize">Show</label>
+            <select id="waAdminPageSize" onchange="changePageSize('waAdmin')">
+              <option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option>
+            </select>
+            <span>entries</span>
+          </div>
+        </div>
+        <div style="overflow-x:auto;width:100%;">
+          <table class="table-laporan" id="tableWhatsappAdmin">
+            <thead>
+              <tr>
+                <th style="min-width:40px;">No</th><th style="min-width:80px;">NIS</th><th style="min-width:140px;">Nama Siswa</th>
+                <th style="min-width:80px;">Kelas</th><th style="min-width:140px;">No. HP Siswa</th><th style="min-width:150px;">WhatsApp Siswa</th>
+                <th style="min-width:140px;">No. HP Wali</th><th style="min-width:150px;">WhatsApp Wali</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyWhatsappAdmin"></tbody>
+          </table>
+        </div>
+        <div class="table-pagination-footer" id="waAdminPaginationFooter">
+          <span id="waAdminEntriesInfo">Showing 0 to 0 of 0 entries</span>
+          <div class="pagination-controls" id="waAdminPaginationBtnGroup"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENGATURAN SISWA -->
+    <section id="page-pengaturan-siswa" class="page hidden">
+      <h1 class="page-title">Pengaturan Akun</h1>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:700;"><span id="settings-avatar-initial">S</span></div>
+          <div>
+            <div style="font-size:18px;font-weight:800;" id="settings-student-name">-</div>
+            <div style="font-size:13px;color:var(--text-muted);" id="settings-student-info">NIS: - | Kelas: -</div>
+          </div>
+        </div>
+        <form id="formGantiPasswordSiswa" onsubmit="handleGantiPassword(event)">
+          <div style="background:#f8fafc;border-radius:var(--radius-md);padding:16px;">
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:10px;"><i class="fas fa-key" style="color:var(--primary);"></i> Ganti Password</div>
+            <div class="form-group"><label for="current_password">Password Saat Ini</label><input type="password" id="current_password" class="form-control" required></div>
+            <div class="form-group"><label for="new_password">Password Baru</label><input type="password" id="new_password" class="form-control" required minlength="6"></div>
+            <div class="form-group"><label for="confirm_password">Konfirmasi Password Baru</label><input type="password" id="confirm_password" class="form-control" required></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;min-height:42px;"><i class="fas fa-save"></i> Ganti Password</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PENGATURAN ADMIN -->
+    <section id="page-pengaturan-admin" class="page hidden">
+      <h1 class="page-title">Pengaturan Akun Admin</h1>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:700;"><i class="fas fa-user-shield" style="font-size:24px;"></i></div>
+          <div>
+            <div style="font-size:18px;font-weight:800;" id="settings-admin-name">Administrator</div>
+            <div style="font-size:13px;color:var(--text-muted);" id="settings-admin-info">Username: admin</div>
+          </div>
+        </div>
+
+        <div style="background:#f0fdf4;border-radius:var(--radius-md);padding:16px;margin-bottom:16px;border:1px solid var(--primary-border);">
+          <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:10px;"><i class="fas fa-user-edit" style="color:var(--primary);"></i> Ganti Username</div>
+          <div class="form-group"><label for="admin_current_username">Username Saat Ini</label><input type="text" id="admin_current_username" class="form-control" readonly style="background:#f1f5f9;"></div>
+          <div class="form-group"><label for="admin_new_username">Username Baru</label><input type="text" id="admin_new_username" class="form-control" placeholder="Minimal 3 karakter" minlength="3"></div>
+          <button type="button" class="btn btn-primary" onclick="handleGantiUsernameAdmin()" style="width:100%;min-height:42px;"><i class="fas fa-save"></i> Ganti Username</button>
+        </div>
+
+        <form id="formGantiPasswordAdmin" onsubmit="handleGantiPasswordAdmin(event)">
+          <div style="background:#f8fafc;border-radius:var(--radius-md);padding:16px;">
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:10px;"><i class="fas fa-key" style="color:var(--primary);"></i> Ganti Password Admin</div>
+            <div class="form-group"><label for="admin_current_password">Password Saat Ini</label><input type="password" id="admin_current_password" class="form-control" required></div>
+            <div class="form-group"><label for="admin_new_password">Password Baru</label><input type="password" id="admin_new_password" class="form-control" required minlength="6"></div>
+            <div class="form-group"><label for="admin_confirm_password">Konfirmasi Password Baru</label><input type="password" id="admin_confirm_password" class="form-control" required></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;min-height:42px;"><i class="fas fa-save"></i> Ganti Password Admin</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- KELAS -->
+    <section id="page-kelas" class="page hidden">
+      <h1 class="page-title">Manajemen Kelas</h1>
+      <div class="card">
+        <form id="formKelas" onsubmit="simpanKelas(event)" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
+          <input type="hidden" id="id_kelas">
+          <div class="form-group" style="margin-bottom:0;flex:2;min-width:160px;">
+            <label for="nama_kelas">Nama Kelas</label>
+            <input type="text" id="nama_kelas" class="form-control" required placeholder="Contoh: X TP 1">
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+            <button type="button" class="btn btn-outline" onclick="resetFormKelas()"><i class="fas fa-times"></i> Batal</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <table id="tableKelas" class="display responsive nowrap" style="width:100%">
+          <thead><tr><th>ID</th><th>Nama Kelas</th><th>Aksi</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SISWA -->
+    <section id="page-siswa" class="page hidden">
+      <h1 class="page-title">Manajemen Siswa</h1>
+      <div class="card">
+        <form id="formSiswa" onsubmit="simpanSiswa(event)">
+          <input type="hidden" id="is_edit_siswa" value="false">
+          <div class="form-group"><label for="nomor_absen"><i class="fas fa-sort-numeric-up"></i> Nomor Absen</label><input type="number" inputmode="numeric" id="nomor_absen" class="form-control" placeholder="Nomor absen" min="1"></div>
+          <div class="form-group"><label for="nis_siswa"><i class="fas fa-id-card"></i> NIS</label><input type="text" inputmode="numeric" pattern="[0-9]*" id="nis_siswa" class="form-control" required placeholder="NIS"></div>
+          <div class="form-group"><label for="nama_siswa"><i class="fas fa-user"></i> Nama Lengkap</label><input type="text" id="nama_siswa" class="form-control" required placeholder="Nama lengkap"></div>
+          <div class="form-group"><label for="kelas_siswa"><i class="fas fa-chalkboard"></i> Pilih Kelas</label><select id="kelas_siswa" class="form-control" required></select></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan Siswa</button>
+            <button type="button" class="btn btn-outline" onclick="resetFormSiswa()"><i class="fas fa-times"></i> Batal</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <table id="tableSiswa" class="display responsive nowrap" style="width:100%">
+          <thead>
+            <tr><th>Nomor Absen</th><th>NIS</th><th>Nama Siswa</th><th>Kelas</th><th>Aksi</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- INPUT ABSENSI -->
+    <section id="page-input-absen" class="page hidden">
+      <h1 class="page-title">Input Absensi Harian</h1>
+      <div class="filter-absen-card">
+        <div class="filter-row">
+          <div class="form-group"><label for="tgl_absen"><i class="far fa-calendar-alt"></i> Tanggal</label><input type="date" id="tgl_absen" class="form-control" required></div>
+          <div class="form-group"><label for="kelas_absen"><i class="fas fa-chalkboard"></i> Kelas</label><select id="kelas_absen" class="form-control" required></select></div>
+          <div class="form-group" style="flex:0 0 auto;">
+            <label>&nbsp;</label>
+            <button type="button" onclick="loadFormAbsen()" class="btn btn-primary"><i class="fas fa-search"></i> Tampilkan</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="area-form-absen" class="hidden">
+        <div class="absen-header-card">
+          <div>
+            <div class="absen-title" id="info_absen_kelas">-</div>
+            <div class="absen-subtitle" id="info_absen_subtitle">Tentukan status kehadiran.</div>
+          </div>
+          <span id="badge_edit" class="badge-edit-mode hidden"><i class="fas fa-edit"></i> Mode Edit</span>
+        </div>
+
+        <div id="info_sudah_absen_banner" class="card hidden" style="background:#e0f2fe;border:1px solid #7dd3fc;color:#0369a1;padding:12px 16px;margin-bottom:14px;font-size:12.5px;font-weight:600;">
+          <i class="fas fa-info-circle"></i> <span id="text_sudah_absen_banner">0 siswa sudah absen mandiri.</span>
+        </div>
+
+        <form id="formSubmitAbsen" onsubmit="submitDataAbsen(event)">
+          <div class="siswa-list-container" id="list_siswa_absen"></div>
+          <div class="sticky-submit-absen" id="container_btn_submit_absen">
+            <button type="submit" class="btn btn-primary" id="btnSubmitAbsen">
+              <i class="fas fa-paper-plane"></i> <span id="btnSubmitText">Simpan Absensi Kelas</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- LAPORAN -->
+    <section id="page-laporan" class="page hidden">
+      <h1 class="page-title">Laporan & Rekap Absensi</h1>
+      <div class="card">
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div class="form-group" style="flex:1;min-width:120px;margin-bottom:0;"><label for="lap_start">Dari</label><input type="date" id="lap_start" class="form-control"></div>
+          <div class="form-group" style="flex:1;min-width:120px;margin-bottom:0;"><label for="lap_end">Sampai</label><input type="date" id="lap_end" class="form-control"></div>
+          <div class="form-group" style="flex:1.5;min-width:140px;margin-bottom:0;"><label for="lap_kelas">Filter Kelas</label><select id="lap_kelas" class="form-control"><option value="">-- Semua --</option></select></div>
+          <div class="form-group" style="display:flex;align-items:flex-end;gap:6px;margin-bottom:0;">
+            <button type="button" onclick="loadLaporan()" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i> Cari</button>
+            <button type="button" onclick="resetFilterLaporan()" class="btn btn-outline btn-sm"><i class="fas fa-undo"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="laporan-container">
+        <div class="table-pagination-header">
+          <div class="table-entries-select">
+            <label for="laporanPageSize">Show</label>
+            <select id="laporanPageSize" onchange="changePageSize('laporan')">
+              <option value="10">10</option><option value="25" selected>25</option><option value="50">50</option><option value="100">100</option>
+            </select>
+            <span>entries</span>
+          </div>
+        </div>
+
+        <div class="laporan-scroll">
+          <table class="table-laporan" id="tableLaporan">
+            <thead>
+              <tr>
+                <th>Tanggal</th><th>Kelas</th><th>NIS</th><th>Nama</th><th>Status</th>
+                <th>Keterangan</th><th>Surat</th><th>Selfie</th><th>Jarak</th>
+              </tr>
+            </thead>
+            <tbody id="laporanTbody"></tbody>
+          </table>
+        </div>
+
+        <div class="table-pagination-footer" id="laporanPaginationFooter">
+          <span id="laporanEntriesInfo">Showing 0 to 0 of 0 entries</span>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;" id="exportButtons"></div>
+            <div class="pagination-controls" id="laporanPaginationBtnGroup"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      Develope by <strong>@JK_HARINTO</strong>
+    </footer>
+  </main>
+</div>
+
+<!-- ⭐ JAVASCRIPT LOKAL — load sekali saja, di akhir -->
+<script src="javascript.js"></script>
+<script src="js-absensi.js"></script>
+<script src="js-maps.js"></script>
+<script src="js-tugas.js"></script>
+<script src="js-ai-guru.js"></script>
+<script src="js-pkl.js?v=20260924"></script>
+<script src="js-pembimbing.js?v=20260924"></script>
+<script src="js-approval-pkl-guru.js?v=20260924"></script>
+<script src="js-monitoring-pkl.js?v=20260924"></script>
+
+</body>
+</html>
